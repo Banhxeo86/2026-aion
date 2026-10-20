@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI-ON 연구회 제작 자료</title>
+<meta name="description" content="2026 AI-ON 교과연구회가 만든 수업·업무·연수 자료 모음">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23264d8c'/><text x='32' y='43' font-size='28' font-family='Arial' font-weight='700' fill='white' text-anchor='middle'>AI</text></svg>">
+<style>
+  :root {
+    --bg: #f4f6fa;
+    --surface: #ffffff;
+    --ink: #172033;
+    --muted: #5b6577;
+    --line: #e2e6ee;
+    --brand: #264d8c;
+    --brand-soft: #e8eef8;
+    --teach: #1f7a5a;  --teach-soft: #e3f3ec;
+    --work:  #9a5b12;  --work-soft:  #fbefdf;
+    --train: #6b3fa0;  --train-soft: #efe7f8;
+    --warn: #8a5a00;   --warn-soft: #fff4d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #10141c; --surface: #191f2b; --ink: #e8ecf3; --muted: #9aa4b5; --line: #2a3242;
+      --brand: #8fb0ea; --brand-soft: #1f2b40;
+      --teach: #6fd0a8; --teach-soft: #17302a;
+      --work: #f0b46a;  --work-soft: #33281a;
+      --train: #c4a3f0; --train-soft: #2a2140;
+      --warn: #f2c55c;  --warn-soft: #332a12;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+    line-height: 1.5; word-break: keep-all; overflow-wrap: anywhere;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+  header { padding: 32px 0 18px; }
+  .eyebrow { font-size: 13px; font-weight: 700; color: var(--brand); letter-spacing: .02em; margin: 0 0 6px; }
+  h1 { font-size: 26px; line-height: 1.3; margin: 0 0 8px; letter-spacing: -.02em; }
+  .lead { margin: 0; color: var(--muted); font-size: 15px; }
+  .stats { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: 13px; color: var(--muted); }
+  .stat b { color: var(--ink); }
+
+  nav {
+    position: sticky; top: 0; z-index: 5; background: var(--bg);
+    padding: 10px 0; border-bottom: 1px solid var(--line);
+  }
+  .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+    border-radius: 999px; padding: 8px 14px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  .chip[aria-pressed="true"] { background: var(--brand); border-color: var(--brand); color: var(--surface); }
+  .search { margin-top: 8px; width: 100%; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+    border-radius: 10px; padding: 10px 12px; font: inherit; font-size: 15px; }
+
+  section { padding-top: 22px; }
+  h2 { font-size: 18px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+  h2 .count { font-size: 13px; color: var(--muted); font-weight: 600; }
+  .bar { width: 6px; height: 18px; border-radius: 3px; background: var(--c); }
+
+  .list { display: grid; gap: 10px; }
+  @media (min-width: 640px) { .list { grid-template-columns: 1fr 1fr; } }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .use { font-size: 12px; font-weight: 700; color: var(--c); background: var(--cs); align-self: flex-start;
+    border-radius: 6px; padding: 2px 8px; }
+  .card h3 { font-size: 16px; margin: 2px 0 0; line-height: 1.35; }
+  .meta { font-size: 13px; color: var(--muted); display: flex; gap: 6px; flex-wrap: wrap; }
+  .meta span + span::before { content: "·"; margin-right: 6px; }
+  .desc { font-size: 14px; margin: 0; color: var(--ink); opacity: .9; }
+  .note { font-size: 12.5px; color: var(--warn); background: var(--warn-soft); border-radius: 8px; padding: 5px 8px; margin: 2px 0 0; }
+  .go {
+    margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 6px;
+    min-height: 44px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 15px;
+    background: var(--c); color: var(--surface);
+  }
+  .card .spacer { flex: 1; }
+  .go:active { transform: scale(.98); }
+  .soon { margin-top: auto; min-height: 44px; display: flex; align-items: center; justify-content: center;
+    border: 1px dashed var(--line); border-radius: 10px; color: var(--muted); font-size: 14px; font-weight: 600; }
+
+  .empty { color: var(--muted); text-align: center; padding: 30px 0; }
+  footer { color: var(--muted); font-size: 13px; padding: 28px 0 40px; text-align: center; }
+  footer p { margin: 4px 0; }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <p class="eyebrow">교과연구회 결과보고서 부록</p>
+  <h1>2026 AI-ON 교과연구회<br>제작 자료</h1>
+  <p class="lead">연구회 선생님들이 AI 도구로 직접 만든 수업·업무·연수 자료입니다. 버튼을 누르면 바로 열립니다.</p>
+  <div class="stats" id="stats"></div>
+</header>
+
+<nav aria-label="분류">
+  <div class="wrap">
+    <div class="chips" id="chips"></div>
+    <input class="search" id="q" type="search" placeholder="자료명·과목·제작자로 찾기" aria-label="자료 검색">
+  </div>
+</nav>
+
+<main class="wrap" id="main"></main>
+
+<footer class="wrap">
+  <p id="soon"></p>
+  <p>최종 업데이트 <span id="updated"></span> · AI-ON 교과연구회</p>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  const COLORS = { teach: ["var(--teach)", "var(--teach-soft)"], work: ["var(--work)", "var(--work-soft)"], train: ["var(--train)", "var(--train-soft)"] };
+  let current = "all";
+
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  function card(it) {
+    const action = it.link
+      ? `<a class="go" href="${esc(it.link)}" target="_blank" rel="noopener">바로가기 <span aria-hidden="true">↗</span></a>`
+      : `<div class="soon">GW노트 탑재 예정</div>`;
+    return `<article class="card">
+      <span class="use">${esc(it.use)}</span>
+      <h3>${esc(it.title)}</h3>
+      <div class="meta"><span>${esc(it.maker)}</span><span>${esc(it.tool)}</span></div>
+      <p class="desc">${esc(it.desc)}</p>
+      ${it.note ? `<p class="note">${esc(it.note)}</p>` : ""}
+      ${action}
+    </article>`;
+  }
+
+  function render() {
+    const q = document.getElementById("q").value.trim().toLowerCase();
+    const match = it => !q || [it.use, it.title, it.maker, it.tool, it.desc].join(" ").toLowerCase().includes(q);
+    let html = "";
+    for (const cat of CATEGORIES) {
+      if (current !== "all" && current !== cat.id) continue;
+      const items = cat.items.filter(match);
+      if (!items.length) continue;
+      const [c, cs] = COLORS[cat.id];
+      html += `<section style="--c:${c};--cs:${cs}">
+        <h2><span class="bar"></span>${esc(cat.name)} <span class="count">${items.length}</span></h2>
+        <div class="list">${items.map(card).join("")}</div>
+      </section>`;
+    }
+    document.getElementById("main").innerHTML = html || `<p class="empty">찾는 자료가 없습니다.</p>`;
+  }
+
+  function init() {
+    const all = CATEGORIES.flatMap(c => c.items);
+    const makers = new Set(all.map(i => i.maker));
+    document.getElementById("stats").innerHTML =
+      `<span class="stat">자료 <b>${all.length}</b>개</span>` +
+      `<span class="stat">바로 열기 <b>${all.filter(i => i.link).length}</b>개</span>` +
+      `<span class="stat">참여 회원 <b>${makers.size}</b>명</span>`;
+    const chips = [{ id: "all", name: "전체" }, ...CATEGORIES];
+    document.getElementById("chips").innerHTML = chips.map(c =>
+      `<button class="chip" data-id="${c.id}" aria-pressed="${c.id === current}">${esc(c.name)}</button>`).join("");
+    document.getElementById("chips").addEventListener("click", e => {
+      const b = e.target.closest(".chip"); if (!b) return;
+      current = b.dataset.id;
+      document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x.dataset.id === current));
+      render();
+    });
+    document.getElementById("q").addEventListener("input", render);
+    document.getElementById("updated").textContent = UPDATED;
+    document.getElementById("soon").textContent = COMING_SOON;
+    render();
+  }
+  init();
+</script>
+</body>
+</html>
